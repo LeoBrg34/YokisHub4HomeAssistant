@@ -28,6 +28,12 @@ Exemples prêts à coller dans `configuration.yaml` + guides pas-à-pas pour ré
 
 Avant toute configuration, récupérez :
 - 🧭 **IP locale** de votre Yokis Hub (ex. `192.168.0.156`)  
+  <div align="left" style="margin: 8px 0 12px;">
+    <a href="./docs/find-hub-ip.md">
+      <img src="https://img.shields.io/badge/Trouver_l’IP_du_Hub-F59E0B?style=for-the-badge" alt="Trouver l’IP du Yokis Hub">
+    </a>
+  </div>
+
 - 🔑 **Token HTTP Basic** encodé en Base64  
   <div align="left" style="margin: 8px 0 12px;">
     <a href="./docs/get-token.md">
@@ -72,7 +78,7 @@ Copiez les sections souhaitées puis collez-les dans `configuration.yaml` :
 
 | Élément à remplacer   | Exemple                     | Où le trouver                   |
 |-----------------------|-----------------------------|----------------------------------|
-| `<IP_DU_HUB>`         | `192.168.0.156`             | IP locale du Yokis Hub          |
+| `<IP_DU_HUB>`         | `192.168.0.156`             | Guide IP Hub / routeur          |
 | `<UID_MODULE>`        | `C84315B9`                  | Dans `server.xml` / guide UID   |
 | `<TOKEN_BASE64>`      | `QWxhZGRpbjpPcGVuU2VzYW1l`  | Sniff réseau / guide Token      |
 
