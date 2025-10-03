@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/LeoBrg34/yokis-hub-connect-4-homeassistant/main/docs/banner.png" alt="Yokis Hub Connect" width="800">
+  <img src="https://raw.githubusercontent.com/LeoBrg34/YokisHub4HomeAssistant/main/docs/banner.png" alt="Yokis Hub Connect" width="800">
 </p>
 
 # 🧰 Yokis Hub Connect pour Home Assistant
