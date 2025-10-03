@@ -38,7 +38,7 @@ Il inclut des exemples prêts à copier dans `configuration.yaml`, des capteurs 
 ---
 
 ## ⚠️ Avertissement
-Ce projet est une **intégration non officielle**, obtenue par ingénierie inverse du protocole HTTP du Yokis Hub.  
+Ce projet est une **intégration non officielle**, obtenue par reverse engineering du protocole HTTP du Yokis Hub.  
 Il n’est pas affilié à Yokis. Utilisation à vos risques et périls.  
 Yokis est une marque déposée appartenant à ses propriétaires respectifs.
 
