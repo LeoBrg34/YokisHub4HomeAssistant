@@ -41,4 +41,4 @@ Yokis est une marque déposée appartenant à ses propriétaires respectifs.
 ---
 
 ## 📄 Licence
-MIT © 2025 [TonPseudo](https://github.com/TonPseudo)
+MIT © 2025 [LeoBrg34](https://github.com/LeoBrg34)
