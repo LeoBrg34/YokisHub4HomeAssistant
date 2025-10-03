@@ -16,7 +16,7 @@ Exemples prêts à coller dans `configuration.yaml` + guides pas-à-pas pour ré
 - 📡 Lecture périodique de l’état via `server.xml`  
 - 🧭 Exemples complets à insérer dans `configuration.yaml`  
 - 🖼️ Captures d’écran + guides pour récupérer **token** et **UID**  
-- 🧪 Générateur YAML interactif pour créer vos commandes rapidement  
+- 🧪 Générateur YAML interactif (lien en fin de page)  
 - 📘 Documentation claire et accessible
 
 ---
@@ -38,19 +38,6 @@ Exemples prêts à coller dans `configuration.yaml` + guides pas-à-pas pour ré
 
 > 📸 **Toutes les captures d’écran ont été prises sur Android**.  
 > Une version iOS est envisagée pour une prochaine release.
-
----
-
-## 🧪 Générer vos blocs YAML automatiquement
-
-➡️ Ouvrez le **[Constructeur de commande YAML](https://leobrg34.github.io/YokisHub4HomeAssistant/generator.html)**, renseignez :
-- L’adresse IP de votre **Yokis Hub**
-- Le **token Base64** récupéré
-- L’**UID** du module
-- Le type d’équipement (Lampe ou Volet)
-- Le nom et la fréquence d’actualisation
-
-👉 Cliquez ensuite sur **Générer** puis sur **Copier** pour insérer directement les blocs YAML dans `configuration.yaml`.
 
 ---
 
@@ -91,11 +78,11 @@ Copiez les sections souhaitées puis collez-les dans `configuration.yaml` :
 
 ### ✍️ Étape 4 — Modifier les valeurs importantes
 
-| Élément à remplacer   | Exemple                   | Où le trouver               |
-|------------------------|----------------------------|-----------------------------|
-| `<IP_DU_HUB>`          | `192.168.0.156`           | IP locale du Yokis Hub      |
-| `<UID_MODULE>`         | `C84315B9`                | Dans `server.xml` ou guide UID |
-| `<TOKEN_BASE64>`       | `QWxhZGRpbjpPcGVuU2VzYW1l` | Via sniff réseau / guide Token |
+| Élément à remplacer   | Exemple                     | Où le trouver                   |
+|-----------------------|-----------------------------|----------------------------------|
+| `<IP_DU_HUB>`         | `192.168.0.156`             | IP locale du Yokis Hub          |
+| `<UID_MODULE>`        | `C84315B9`                  | Dans `server.xml` / guide UID   |
+| `<TOKEN_BASE64>`      | `QWxhZGRpbjpPcGVuU2VzYW1l`  | Sniff réseau / guide Token      |
 
 > 💡 Le token doit **toujours** être précédé de `Basic` dans le header `Authorization`.
 
