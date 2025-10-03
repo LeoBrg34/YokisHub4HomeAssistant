@@ -50,6 +50,16 @@ Avant toute configuration, récupérez :
 - 🔑 **Token HTTP Basic** encodé en Base64 → [Guide Token](./docs/get-token.md)  
 - 🆔 **UID** de vos modules Yokis → [Guide UID](./docs/get-module-id.md)
 
+<div align="left" style="margin: 10px 0 0;">
+  <a href="./docs/get-token.md">
+    <img src="https://img.shields.io/badge/R%C3%A9cup%C3%A9rer_le_token-34C759?style=for-the-badge" alt="Récupérer le token">
+  </a>
+  &nbsp;
+  <a href="./docs/get-module-id.md">
+    <img src="https://img.shields.io/badge/R%C3%A9cup%C3%A9rer_l'ID_du_module-0A84FF?style=for-the-badge" alt="Récupérer l'ID du module">
+  </a>
+</div>
+
 > ⚠️ Ces trois éléments sont indispensables pour que les commandes REST fonctionnent correctement.
 
 ---
