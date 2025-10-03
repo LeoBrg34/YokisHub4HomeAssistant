@@ -15,29 +15,10 @@ Exemples prêts à coller dans `configuration.yaml` + guides pas-à-pas pour ré
 - ✅ Commandes REST pour volets (covers), lumières et interrupteurs  
 - 📡 Lecture périodique de l’état via `server.xml`  
 - 🧭 Exemples complets à insérer dans `configuration.yaml`  
-- 🖼️ Captures d’écran + guides pour récupérer **token** et **UID**  
 - 🧪 Générateur YAML interactif (lien en fin de page)  
 - 📘 Documentation claire et accessible
 
----
-
-## 🔎 Récupérer le token & l’ID du module
-
-<div align="center">
-  <a href="./docs/get-token.md">
-    <img src="https://img.shields.io/badge/R%C3%A9cup%C3%A9rer_le_token-34C759?style=for-the-badge" alt="Récupérer le token">
-  </a>
-  &nbsp;
-  <a href="./docs/get-module-id.md">
-    <img src="https://img.shields.io/badge/R%C3%A9cup%C3%A9rer_l'ID_du_module-0A84FF?style=for-the-badge" alt="Récupérer l'ID du module">
-  </a>
-</div>
-
-- Le guide **Token** explique comment sniffer la requête HTTP Basic Auth et récupérer le header encodé en Base64.  
-- Le guide **ID module** montre comment trouver l’UID dans `server.xml` ou via analyse réseau, avec captures d’écran détaillées.
-
-> 📸 **Toutes les captures d’écran ont été prises sur Android**.  
-> Une version iOS est envisagée pour une prochaine release.
+> 📸 Les captures d’écran des guides ont été prises sur **Android**. Une version iOS est envisagée pour une prochaine release.
 
 ---
 
@@ -47,18 +28,19 @@ Exemples prêts à coller dans `configuration.yaml` + guides pas-à-pas pour ré
 
 Avant toute configuration, récupérez :
 - 🧭 **IP locale** de votre Yokis Hub (ex. `192.168.0.156`)  
-- 🔑 **Token HTTP Basic** encodé en Base64 → [Guide Token](./docs/get-token.md)  
-- 🆔 **UID** de vos modules Yokis → [Guide UID](./docs/get-module-id.md)
+- 🔑 **Token HTTP Basic** encodé en Base64  
+  <div align="left" style="margin: 8px 0 12px;">
+    <a href="./docs/get-token.md">
+      <img src="https://img.shields.io/badge/R%C3%A9cup%C3%A9rer_le_token-34C759?style=for-the-badge" alt="Récupérer le token">
+    </a>
+  </div>
 
-<div align="left" style="margin: 10px 0 0;">
-  <a href="./docs/get-token.md">
-    <img src="https://img.shields.io/badge/R%C3%A9cup%C3%A9rer_le_token-34C759?style=for-the-badge" alt="Récupérer le token">
-  </a>
-  &nbsp;
-  <a href="./docs/get-module-id.md">
-    <img src="https://img.shields.io/badge/R%C3%A9cup%C3%A9rer_l'ID_du_module-0A84FF?style=for-the-badge" alt="Récupérer l'ID du module">
-  </a>
-</div>
+- 🆔 **UID** de vos modules Yokis  
+  <div align="left" style="margin: 8px 0 0;">
+    <a href="./docs/get-module-id.md">
+      <img src="https://img.shields.io/badge/R%C3%A9cup%C3%A9rer_l'ID_du_module-0A84FF?style=for-the-badge" alt="Récupérer l'ID du module">
+    </a>
+  </div>
 
 > ⚠️ Ces trois éléments sont indispensables pour que les commandes REST fonctionnent correctement.
 
