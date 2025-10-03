@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="https://raw.githubusercontent.com/LeoBrg34/yokis-hub-connect-4-homeassistant/main/docs/banner.png" alt="Yokis Hub Connect" width="800">
+</p>
+
 # 🧰 Yokis Hub Connect pour Home Assistant
 
 **Connecteur non officiel entre le Yokis Hub et Home Assistant.**  
