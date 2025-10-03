@@ -43,7 +43,7 @@ Exemples prêts à coller dans `configuration.yaml` + guides pas-à-pas pour ré
 
 ## 🧪 Générer vos blocs YAML automatiquement
 
-➡️ Ouvrez le **[Constructeur de commande YAML](https://leobrg34.github.io/YokisHub4HomeAssistant/docs/generator.html)**, renseignez :
+➡️ Ouvrez le **[Constructeur de commande YAML](https://leobrg34.github.io/YokisHub4HomeAssistant/generator.html)**, renseignez :
 - L’adresse IP de votre **Yokis Hub**
 - Le **token Base64** récupéré
 - L’**UID** du module
