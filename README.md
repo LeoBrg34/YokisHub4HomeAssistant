@@ -111,49 +111,10 @@ Copiez les sections souhaitées puis collez-les dans `configuration.yaml` :
 
 ---
 
-## Exemple minimal
-
-```yaml
-# Commande REST : fixer la position d'un volet (0-100)
-rest_command:
-  yokis_set_position_exemple:
-    url: "http://192.168.0.156/command.xml?action=order&id=C84315B9&order=varX&ext1={{ position }}"
-    method: get
-    headers:
-      Authorization: "Basic VOTRE_TOKEN_BASE64_ICI"
-
-# Capteur REST : lecture de la position depuis server.xml
-sensor:
-  - platform: rest
-    name: Volet Chambre Brut
-    resource: http://192.168.0.156/server.xml?gettable&update=1
-    method: GET
-    headers:
-      Authorization: "Basic VOTRE_TOKEN_BASE64_ICI"
-    value_template: >-
-      {% set volet = value_json.data.table | selectattr("uid", "equalto", "C84315B9") | list | first %}
-      {{ volet.var | default(0) }}
-    unit_of_measurement: "%"
-
-# Volet Home Assistant basé sur le capteur REST
-cover:
-  - platform: template
-    covers:
-      volet_chambre:
-        friendly_name: "Volet Chambre"
-        position_template: "{{ states('sensor.volet_chambre_brut') | int(0) }}"
-        set_cover_position:
-          service: rest_command.yokis_set_position_exemple
-          data:
-            position: "{{ position }}"
-
-
 ⚠️ Avertissement
-
 Ce projet est une intégration non officielle, basée sur du reverse engineering du protocole HTTP Yokis.
 Il n’est pas affilié à Yokis. Utilisation à vos risques et périls.
 Yokis est une marque déposée appartenant à ses propriétaires respectifs.
 
 📄 Licence
-
 MIT © 2025 LeoBrg34
