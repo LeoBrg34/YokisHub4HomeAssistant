@@ -35,7 +35,7 @@
 <body>
   <div class="container">
     <h1>🧰 YokisHub4HomeAssistant — Constructeur de commande YAML</h1>
-    <p class="lead">Générez automatiquement vos blocs <code>rest_command</code>, <code>sensor</code>, <code>light/cover</code> pour Home Assistant à partir de l’IP du Hub, l’UID du module et votre token <strong>HTTP Basic (Base64)</strong>.</p>
+    <p class="lead">Générez automatiquement vos blocs <code>rest_command</code>, <code>sensor</code>, <code>light/cover/switch</code> pour Home Assistant à partir de l’IP du Hub, l’UID du module et votre token <strong>HTTP Basic (Base64)</strong>.</p>
 
     <div class="grid">
       <!-- FORM -->
@@ -46,16 +46,17 @@
         <select id="type">
           <option value="light">Lampe</option>
           <option value="cover">Volet roulant</option>
+          <option value="switch">Interrupteur</option>
         </select>
 
         <div class="row">
           <div>
             <label for="friendly">Nom d’affichage (friendly_name)</label>
-            <input id="friendly" placeholder="Ex: Lumière Terrasse / Volet Chambre" />
+            <input id="friendly" placeholder="Ex: Lumière Terrasse / Volet Chambre / Interrupteur Garage" />
           </div>
           <div>
             <label for="slug">Identifiant interne (slug court, a–z0–9_)</label>
-            <input id="slug" placeholder="Ex: lumiere_terrasse / volet_chambre_leo" />
+            <input id="slug" placeholder="Ex: lumiere_terrasse / volet_chambre_leo / interrupteur_garage" />
           </div>
         </div>
 
@@ -87,7 +88,7 @@
         <div class="actions">
           <button class="btn primary" id="buildBtn">Générer le YAML</button>
           <button class="btn" id="resetBtn">Réinitialiser</button>
-          <span class="tips">Besoin d’aide ? <a href="https://github.com/LeoBrg34/YokisHub4HomeAssistant/blob/main/docs/get-token.md">Récupérer le token</a> · <a href="https://github.com/LeoBrg34/YokisHub4HomeAssistant/blob/main/docs/get-module-id.md">Récupérer l’UID</a></span>
+          <span class="tips">Besoin d’aide ? <a href="./get-token.md">Récupérer le token</a> · <a href="./get-module-id.md">Récupérer l’UID</a></span>
         </div>
       </div>
 
@@ -107,7 +108,7 @@
           <button class="btn secondary" data-copy="#outSensor">Copier</button>
         </div>
 
-        <h3>3) Entité Home Assistant (<code>light</code> ou <code>cover</code>)</h3>
+        <h3>3) Entité Home Assistant (<code>light</code> / <code>cover</code> / <code>switch</code>)</h3>
         <pre id="outEntity"># Généré ici…</pre>
         <div class="actions">
           <button class="btn secondary" data-copy="#outEntity">Copier</button>
@@ -204,7 +205,7 @@
         availability_template: >-
           {{ states('sensor.${sensor_key}') not in ['unavailable', 'unknown', None, ''] }}`;
 
-    return {REST, SENSOR, ENTITY, sensor_key};
+    return {REST, SENSOR, ENTITY};
   }
 
   function buildCover({friendly, slug, ip, uid, token, scan, prefix}){
@@ -254,7 +255,60 @@
           {% else %} mdi:blinds-horizontal
           {% endif %}`;
 
-    return {REST, SENSOR, ENTITY, sensor_key};
+    return {REST, SENSOR, ENTITY};
+  }
+
+  function buildSwitch({friendly, slug, ip, uid, token, scan, prefix}){
+    const prefixCmd = prefix ? `${prefix}_` : '';
+    const rest_on = `yokis_${prefixCmd}${slug}_on`;
+    const rest_off = `yokis_${prefixCmd}${slug}_off`;
+    const sensor_name = friendly + ' Etat';
+    const sensor_key = sanitizeSlug(friendly)+'_etat';
+
+    const REST =
+`rest_command:
+  ${rest_on}:
+    url: "http://${ip}/command.xml?action=order&id=${uid}&order=on"
+    method: get
+    headers:
+      Authorization: "Basic ${token}"
+  ${rest_off}:
+    url: "http://${ip}/command.xml?action=order&id=${uid}&order=off"
+    method: get
+    headers:
+      Authorization: "Basic ${token}"`;
+
+    const SENSOR =
+`sensor:
+  - platform: rest
+    name: ${sensor_name}
+    resource: http://${ip}/server.xml?gettable&update=1
+    method: GET
+    headers:
+      Authorization: "Basic ${token}"
+    value_template: >-
+      {% set s = value_json.data.table | selectattr("uid", "equalto", "${uid}") | list | first %}
+      {{ s.var | default('0') }}
+    scan_interval: ${scan}`;
+
+    const ENTITY =
+`switch:
+  - platform: template
+    switches:
+      ${slug}:
+        friendly_name: "${friendly}"
+        unique_id: "switch_${slug}"
+        value_template: >-
+          {% set s = states('sensor.${sensor_key}') %}
+          {{ s | int(0) == 100 }}
+        turn_on:
+          service: rest_command.${rest_on}
+        turn_off:
+          service: rest_command.${rest_off}
+        availability_template: >-
+          {{ states('sensor.${sensor_key}') not in ['unavailable', 'unknown', None, ''] }}`;
+
+    return {REST, SENSOR, ENTITY};
   }
 
   function buildAllYaml(blocks){
@@ -272,19 +326,26 @@ ${blocks.ENTITY}
 
   function generate(){
     const type = elType.value;
-    const friendly = ensure(elFriendly.value, type === 'light' ? 'Lumière Exemple' : 'Volet Exemple');
-    const slug = sanitizeSlug( ensure(elSlug.value, type === 'light' ? 'lumiere_exemple' : 'volet_exemple') );
+    const friendly = ensure(
+      elFriendly.value,
+      type === 'light' ? 'Lumière Exemple' : type === 'cover' ? 'Volet Exemple' : 'Interrupteur Exemple'
+    );
+    const slug = sanitizeSlug(
+      ensure(elSlug.value, type === 'light' ? 'lumiere_exemple' : type === 'cover' ? 'volet_exemple' : 'interrupteur_exemple')
+    );
     const ip = ensure(elIP.value, '192.168.0.156');
-    const uid = ensure(elUID.value, type === 'light' ? 'A111FCC0' : 'C84315B9');
+    const uid = ensure(elUID.value, type === 'cover' ? 'C84315B9' : 'A111FCC0');
     const token = ensure(elToken.value, 'VOTRE_TOKEN_BASE64_ICI');
-    const scan = Math.max(1, parseInt(elScan.value|| (type==='light'?5:10), 10));
+    const scan = Math.max(1, parseInt(elScan.value || (type==='cover'?10:5), 10));
     const prefix = sanitizeSlug(elPrefix.value);
 
     let blocks;
     if(type === 'light'){
       blocks = buildLight({friendly, slug, ip, uid, token, scan, prefix});
-    } else {
+    } else if (type === 'cover'){
       blocks = buildCover({friendly, slug, ip, uid, token, scan, prefix});
+    } else {
+      blocks = buildSwitch({friendly, slug, ip, uid, token, scan, prefix});
     }
 
     outRest.textContent   = blocks.REST;
@@ -297,7 +358,6 @@ ${blocks.ENTITY}
       setTimeout(()=>el.classList.remove('ok'), 700);
     });
 
-    // stocker quelques infos pour le nom de fichier
     outAll.dataset.slug = slug;
     outAll.dataset.type = type;
   }
@@ -326,7 +386,6 @@ ${blocks.ENTITY}
         flashBtn(selector, 'Copié ✓');
       });
     } else {
-      // fallback
       const ta = document.createElement('textarea');
       ta.value = txt; document.body.appendChild(ta);
       ta.select(); document.execCommand('copy'); document.body.removeChild(ta);
@@ -366,6 +425,7 @@ ${blocks.ENTITY}
   byId('downloadBtn').addEventListener('click', downloadYaml);
 
   // Préremplissage démo
+  elType.value = 'light';
   elFriendly.value = 'Lumière Terrasse';
   elSlug.value = 'lumiere_terrasse';
   elIP.value = '192.168.0.156';
