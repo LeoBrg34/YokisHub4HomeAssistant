@@ -5,7 +5,7 @@
 # 🏠 YokisHub4HomeAssistant
 
 **Connecteur non officiel entre le Yokis Hub et Home Assistant.**  
-Pilotez vos **volets**, **lumières** et **interrupteurs** via de simples **commandes REST**, avec des capteurs qui lisent l’état depuis `server.xml`.  
+Pilotez vos **volets**, **lumières** et **interrupteurs** via de simples **commandes REST**, avec des capteurs qui lisent l’état depuis `configuration.yaml`.  
 Exemples prêts à coller dans `configuration.yaml` + guides pas-à-pas pour récupérer **token** et **UID module**.
 
 ---
