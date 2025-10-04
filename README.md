@@ -15,7 +15,7 @@ Exemples prêts à coller dans `configuration.yaml` + guides pas-à-pas pour ré
 - ✅ Commandes REST pour volets (covers), lumières et interrupteurs  
 - 📡 Lecture périodique de l’état via `server.xml`  
 - 🧭 Exemples complets à insérer dans `configuration.yaml`  
-- 🧪 Générateur YAML interactif (lien en fin de page)  
+- 🧪 Générateur YAML interactif  
 - 📘 Documentation claire et accessible
 
 > 📸 Les captures d’écran des guides ont été prises sur **Android**. Une version iOS est envisagée pour une prochaine release.
@@ -83,12 +83,16 @@ Copiez les sections souhaitées puis collez-les dans `configuration.yaml` :
 
 > 💡 Le token doit **toujours** être précédé de `Basic` dans le header `Authorization`.
 
-> ℹ️ **Besoin d’aide pour générer automatiquement les blocs YAML ?**  
-> Vous pouvez vous aider de cet outil fait par mes soins :  
-> • **Version interactive (GitHub Pages)** :  
->   https://leobrg34.github.io/YokisHub4HomeAssistant/generator.html  
-> • **Fichier source dans le dépôt (au cas où)** :  
->   https://github.com/LeoBrg34/YokisHub4HomeAssistant/blob/main/docs/generator.html
+<!-- 🔘 Boutons pour accéder au générateur -->
+<div align="left" style="margin: 10px 0 0;">
+  <a href="https://leobrg34.github.io/YokisHub4HomeAssistant/generator.html">
+    <img src="https://img.shields.io/badge/Ouvrir_le_g%C3%A9n%C3%A9rateur_(Pages)-8B5CF6?style=for-the-badge" alt="Ouvrir le générateur (GitHub Pages)">
+  </a>
+  &nbsp;
+  <a href="https://github.com/LeoBrg34/YokisHub4HomeAssistant/blob/main/docs/generator.html">
+    <img src="https://img.shields.io/badge/Voir_le_code_source-6B7280?style=for-the-badge" alt="Voir le code source du générateur">
+  </a>
+</div>
 
 ---
 
