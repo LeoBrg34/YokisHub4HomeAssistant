@@ -62,7 +62,6 @@ Avant toute configuration, récupérez :
 
 ### 📋 Étape 3 — Copier les blocs YAML
 
-Rendez-vous dans la [documentation complète](./docs/configuration.md).  
 Copiez les sections souhaitées puis collez-les dans `configuration.yaml` :
 
 - `rest_command` → commandes Yokis  
@@ -83,6 +82,13 @@ Copiez les sections souhaitées puis collez-les dans `configuration.yaml` :
 | `<TOKEN_BASE64>`      | `QWxhZGRpbjpPcGVuU2VzYW1l`  | Sniff réseau / guide Token      |
 
 > 💡 Le token doit **toujours** être précédé de `Basic` dans le header `Authorization`.
+
+> ℹ️ **Besoin d’aide pour générer automatiquement les blocs YAML ?**  
+> Vous pouvez vous aider de cet outil fait par mes soins :  
+> • **Version interactive (GitHub Pages)** :  
+>   https://leobrg34.github.io/YokisHub4HomeAssistant/generator.html  
+> • **Fichier source dans le dépôt (au cas où)** :  
+>   https://github.com/LeoBrg34/YokisHub4HomeAssistant/blob/main/docs/generator.html
 
 ---
 
