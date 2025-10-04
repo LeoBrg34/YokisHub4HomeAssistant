@@ -2,7 +2,7 @@
   <img src="docs/banner.png" alt="Yokis Hub Connect Banner" width="200">
 </p>
 
-# 🏠🧰 YokisHub4HomeAssistant
+# 🏠 YokisHub4HomeAssistant
 
 **Connecteur non officiel entre le Yokis Hub et Home Assistant.**  
 Pilotez vos **volets**, **lumières** et **interrupteurs** via de simples **commandes REST**, avec des capteurs qui lisent l’état depuis `server.xml`.  
@@ -10,38 +10,37 @@ Exemples prêts à coller dans `configuration.yaml` + guides pas-à-pas pour ré
 
 ---
 
-## ✨ Fonctionnalités
+## Fonctionnalités
 
 - ✅ Commandes REST pour volets (covers), lumières et interrupteurs  
-- 📡 Lecture périodique de l’état via `server.xml`  
-- 🧭 Exemples complets à insérer dans `configuration.yaml`  
-- 🧪 Générateur YAML interactif  
-- 📘 Documentation claire et accessible
+- Exemples complets à insérer dans `configuration.yaml`  
+- Générateur YAML interactif  
+- Documentation claire et accessible
 
-> 📸 Les captures d’écran des guides ont été prises sur **Android**. Une version iOS est envisagée pour une prochaine release.
+> Les captures d’écran des guides ont été prises sur **Android**. Une version iOS est envisagée pour une prochaine release.
 
 ---
 
-## 🚀 Mise en route rapide — Étapes détaillées
+## Mise en route rapide — Étapes détaillées
 
-### 🪄 Étape 1 — Récupérer vos informations de connexion
+### Étape 1 — Récupérer vos informations de connexion
 
 Avant toute configuration, récupérez :
-- 🧭 **IP locale** de votre Yokis Hub (ex. `192.168.0.156`)  
+- **IP locale** de votre Yokis Hub (ex. `192.168.0.156`)  
   <div align="left" style="margin: 8px 0 12px;">
     <a href="./docs/findip.md">
       <img src="https://img.shields.io/badge/Trouver_l’IP_du_Hub-F59E0B?style=for-the-badge" alt="Trouver l’IP du Yokis Hub">
     </a>
   </div>
 
-- 🔑 **Token HTTP Basic** encodé en Base64  
+- **Token HTTP Basic** encodé en Base64  
   <div align="left" style="margin: 8px 0 12px;">
     <a href="./docs/get-token.md">
       <img src="https://img.shields.io/badge/R%C3%A9cup%C3%A9rer_le_token-34C759?style=for-the-badge" alt="Récupérer le token">
     </a>
   </div>
 
-- 🆔 **UID** de vos modules Yokis  
+- **UID** de vos modules Yokis  
   <div align="left" style="margin: 8px 0 0;">
     <a href="./docs/get-module-id.md">
       <img src="https://img.shields.io/badge/R%C3%A9cup%C3%A9rer_l'ID_du_module-0A84FF?style=for-the-badge" alt="Récupérer l'ID du module">
@@ -52,7 +51,7 @@ Avant toute configuration, récupérez :
 
 ---
 
-### 📝 Étape 2 — Ouvrir votre fichier `configuration.yaml`
+### Étape 2 — Ouvrir votre fichier `configuration.yaml`
 
 1. Allez dans l'extension File Editor ou par connexion SSH afin d'accèder au configuration.yaml de votre Home Assistant.  
 2. Ouvrez le fichier `configuration.yaml` avec l’éditeur intégré ou VS Code.  
@@ -60,7 +59,7 @@ Avant toute configuration, récupérez :
 
 ---
 
-### 📋 Étape 3 — Copier les blocs YAML
+### Étape 3 — Copier les blocs YAML
 
 Copiez les sections souhaitées puis collez-les dans `configuration.yaml` :
 
@@ -73,7 +72,7 @@ Copiez les sections souhaitées puis collez-les dans `configuration.yaml` :
 
 ---
 
-### ✍️ Étape 4 — Modifier les valeurs importantes
+### Étape 4 — Modifier les valeurs importantes
 
 | Élément à remplacer   | Exemple                     | Où le trouver                   |
 |-----------------------|-----------------------------|----------------------------------|
@@ -83,7 +82,6 @@ Copiez les sections souhaitées puis collez-les dans `configuration.yaml` :
 
 > 💡 Le token doit **toujours** être précédé de `Basic` dans le header `Authorization`.
 
-<!-- 🔘 Boutons pour accéder au générateur -->
 <div align="left" style="margin: 10px 0 0;">
   <a href="https://leobrg34.github.io/YokisHub4HomeAssistant/generator.html">
     <img src="https://img.shields.io/badge/Ouvrir_le_g%C3%A9n%C3%A9rateur_(Pages)-8B5CF6?style=for-the-badge" alt="Ouvrir le générateur (GitHub Pages)">
@@ -96,27 +94,27 @@ Copiez les sections souhaitées puis collez-les dans `configuration.yaml` :
 
 ---
 
-### 🔄 Étape 5 — Redémarrer Home Assistant
+### Étape 5 — Redémarrer Home Assistant
 
 1. Ouvrez **Outils De Développement --> Redémarrer**.  
 2. Patientez.
 
-> 🧠 En cas d’erreur, vérifiez les indentations YAML et guillemets.
+> En cas d’erreur, vérifiez les indentations YAML et guillemets.
 
 ---
 
-### 🧪 Étape 6 — Tester les entités
+### Étape 6 — Tester les entités
 
 - Allez dans **Paramètres → Appareils & Services → Entités**  
 - Recherchez vos entités `volet_`, `light_`, `switch_`  
-- Essayez une commande pour vérifier le bon fonctionnement 🎉
+- Essayez une commande pour vérifier le bon fonctionnement
 
 ---
 
-## 🧩 Exemple minimal
+## Exemple minimal
 
 ```yaml
-# --- Commande REST : fixer la position d'un volet (0-100)
+# Commande REST : fixer la position d'un volet (0-100)
 rest_command:
   yokis_set_position_exemple:
     url: "http://192.168.0.156/command.xml?action=order&id=C84315B9&order=varX&ext1={{ position }}"
@@ -124,7 +122,7 @@ rest_command:
     headers:
       Authorization: "Basic VOTRE_TOKEN_BASE64_ICI"
 
-# --- Capteur REST : lecture de la position depuis server.xml
+# Capteur REST : lecture de la position depuis server.xml
 sensor:
   - platform: rest
     name: Volet Chambre Brut
@@ -137,7 +135,7 @@ sensor:
       {{ volet.var | default(0) }}
     unit_of_measurement: "%"
 
-# --- Volet Home Assistant basé sur le capteur REST
+# Volet Home Assistant basé sur le capteur REST
 cover:
   - platform: template
     covers:
@@ -148,14 +146,3 @@ cover:
           service: rest_command.yokis_set_position_exemple
           data:
             position: "{{ position }}"
-
-
-⚠️ Avertissement
-
-Ce projet est une intégration non officielle, basée sur du reverse engineering du protocole HTTP Yokis.
-Il n’est pas affilié à Yokis. Utilisation à vos risques et périls.
-Yokis est une marque déposée appartenant à ses propriétaires respectifs.
-
-📄 Licence
-
-MIT © 2025 LeoBrg34
