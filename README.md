@@ -111,6 +111,18 @@ Copiez les sections souhaitées puis collez-les dans `configuration.yaml` :
 
 ---
 
+<p align="center">
+  <a href="https://fr.tipeee.com/yokishub4homeassistant/" target="_blank">
+    <img src="docs/tipeee.png" alt="Soutenir sur Tipeee" width="200">
+  </a>
+</p>
+
+<p align="center" style="margin-top: 5px; font-size:14px;">
+  Si vous voulez me soutenir pour avoir la version iOS le plus rapidement possible 🚀
+</p>
+
+
+
 > ⚠️ **Avertissement**
 > 
 > Ce projet est une **intégration non officielle**, basée sur du **reverse engineering** du protocole HTTP Yokis.
@@ -118,6 +130,5 @@ Copiez les sections souhaitées puis collez-les dans `configuration.yaml` :
 > **Utilisation à vos risques et périls.**
 > Yokis est une marque déposée appartenant à ses propriétaires respectifs.
 
-
-📄 Licence
+📄 Licence  
 MIT © 2025 LeoBrg34
