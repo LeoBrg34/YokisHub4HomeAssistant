@@ -113,7 +113,8 @@ Copiez les sections souhaitées puis collez-les dans `configuration.yaml` :
 
 ⚠️ Avertissement
 Ce projet est une intégration non officielle, basée sur du reverse engineering du protocole HTTP Yokis.
-Il n’est pas affilié à Yokis. Utilisation à vos risques et périls.
+Il n’est pas affilié à Yokis.
+Utilisation à vos risques et périls.
 Yokis est une marque déposée appartenant à ses propriétaires respectifs.
 
 📄 Licence
