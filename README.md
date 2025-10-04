@@ -98,9 +98,8 @@ Copiez les sections souhaitées puis collez-les dans `configuration.yaml` :
 
 ### 🔄 Étape 5 — Redémarrer Home Assistant
 
-1. Ouvrez **Paramètres → Système → Contrôle du serveur**.  
-2. Cliquez sur **Vérifier la configuration** ✅  
-3. Si tout est correct, cliquez sur **Redémarrer** 🔁
+1. Ouvrez **Outils De Développement --> Redémarrer**.  
+2. Patientez.
 
 > 🧠 En cas d’erreur, vérifiez les indentations YAML et guillemets.
 
