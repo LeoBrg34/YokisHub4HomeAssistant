@@ -21,10 +21,12 @@ Ce guide explique comment **identifier l’UID (identifiant unique)** d’un mod
 
 3) **Repérez l’URL** de type :
 http://192.168.0.x/command.xml?action=order&id=xxxxxxxx&order=off&ext1=0
-L’**UID du module** est la valeur du paramètre **`id`** :
+
+
+L’**UID du module** est la valeur du paramètre **`id`**.
 
 <p>
-<img src="./howto/module-name/img5.jpeg" alt="Trouver l’UID dans l’URL (paramètre id=...)" width="360">
+  <img src="./howto/module-name/img5.jpeg" alt="Trouver l’UID dans l’URL (paramètre id=...)" width="360">
 </p>
 
 ---
@@ -33,7 +35,9 @@ L’**UID du module** est la valeur du paramètre **`id`** :
 
 - **Requête** :
 http://192.168.0.156/command.xml?action=order&id=C84315B9&order=off&ext1=0
-- **UID** : C84315B9
+
+
+- **UID** : `C84315B9`
 
 ---
 
@@ -44,25 +48,22 @@ Utilisez cet UID dans vos blocs YAML (ex. `sensor` et `rest_command`) :
 ```yaml
 # Commande REST (ex. volet)
 rest_command:
-yokis_set_position_exemple:
-  url: "http://192.168.0.156/command.xml?action=order&id=C84315B9&order=varX&ext1={{ position }}"
-  method: get
-  headers:
-    Authorization: "Basic VOTRE_TOKEN_BASE64_ICI"
+  yokis_set_position_exemple:
+    url: "http://192.168.0.156/command.xml?action=order&id=C84315B9&order=varX&ext1=<POSITION>"
+    method: get
+    headers:
+      Authorization: "Basic VOTRE_TOKEN_BASE64_ICI"
 
 # Capteur REST lisant l'état via server.xml (même UID)
 sensor:
-- platform: rest
-  name: Volet Chambre Brut
-  resource: http://192.168.0.156/server.xml?gettable&update=1
-  method: GET
-  headers:
-    Authorization: "Basic VOTRE_TOKEN_BASE64_ICI"
-  value_template: >-
-    {% set volet = value_json.data.table | selectattr("uid", "equalto", "C84315B9") | list | first %}
-    {{ volet.var | default(0) }}
-  unit_of_measurement: "%"
-
+  - platform: rest
+    name: Volet Chambre Brut
+    resource: http://192.168.0.156/server.xml?gettable&update=1
+    method: GET
+    headers:
+      Authorization: "Basic VOTRE_TOKEN_BASE64_ICI"
+    # value_template: utilisez le template proposé dans docs/configuration.md
+    unit_of_measurement: "%"
 ✅ Résumé
 
 Ouvrez la trame capturée correspondant à l’action sur votre module.
