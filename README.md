@@ -64,7 +64,7 @@ Avant toute configuration, récupérez :
 Copiez les sections souhaitées puis collez-les dans `configuration.yaml` :
 
 - `rest_command` → commandes Yokis  
-- `sensor` → lecture de l’état via `server.xml`  
+- `sensor` → lecture de l’état via `configuration.yaml`  
 - `light`, `cover`, `switch` → création des entités Home Assistant  
 - `input_number`, `template` → sliders & états fiables
 
@@ -77,7 +77,7 @@ Copiez les sections souhaitées puis collez-les dans `configuration.yaml` :
 | Élément à remplacer   | Exemple                     | Où le trouver                   |
 |-----------------------|-----------------------------|----------------------------------|
 | `<IP_DU_HUB>`         | `192.168.0.156`             | Guide IP Hub / routeur          |
-| `<UID_MODULE>`        | `C84315B9`                  | Dans `server.xml` / guide UID   |
+| `<UID_MODULE>`        | `C84315B9`                  | Dans `configuration.yaml` / guide UID   |
 | `<TOKEN_BASE64>`      | `QWxhZGRpbjpPcGVuU2VzYW1l`  | Sniff réseau / guide Token      |
 
 > 💡 Le token doit **toujours** être précédé de `Basic` dans le header `Authorization`.
