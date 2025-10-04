@@ -29,7 +29,7 @@ Exemples prêts à coller dans `configuration.yaml` + guides pas-à-pas pour ré
 Avant toute configuration, récupérez :
 - 🧭 **IP locale** de votre Yokis Hub (ex. `192.168.0.156`)  
   <div align="left" style="margin: 8px 0 12px;">
-    <a href="./docs/find-hub-ip.md">
+    <a href="./docs/findip.md">
       <img src="https://img.shields.io/badge/Trouver_l’IP_du_Hub-F59E0B?style=for-the-badge" alt="Trouver l’IP du Yokis Hub">
     </a>
   </div>
