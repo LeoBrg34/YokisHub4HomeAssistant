@@ -2,7 +2,7 @@
   <img src="docs/banner.png" alt="Yokis Hub Connect Banner" width="200">
 </p>
 
-# 🧰 YokisHub4HomeAssistant
+# 🅈 YokisHub4HomeAssistant
 
 **Connecteur non officiel entre le Yokis Hub et Home Assistant.**  
 Pilotez vos **volets**, **lumières** et **interrupteurs** via de simples **commandes REST**, avec des capteurs qui lisent l’état depuis `server.xml`.  
