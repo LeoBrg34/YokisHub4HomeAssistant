@@ -39,6 +39,7 @@ Ce guide vous montre comment **trouver l’adresse IP locale** de votre Yokis Hu
 - Relevez l’IP attribuée (ex. `192.168.0.156`)
 
 **Option B — Depuis un ordinateur (même réseau)**  
-- **Windows (PowerShell)**
+
+- **Windows (PowerShell)** :
   ```powershell
   arp -a
