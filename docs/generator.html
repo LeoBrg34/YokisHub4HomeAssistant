@@ -113,6 +113,13 @@
           <button class="btn secondary" data-copy="#outEntity">Copier</button>
         </div>
 
+        <h3>4) Tout-en-un (<code>configuration.yaml</code>)</h3>
+        <pre id="outAll"># Généré ici…</pre>
+        <div class="actions">
+          <button class="btn secondary" id="copyAllBtn">Copier tout</button>
+          <button class="btn" id="downloadBtn">Télécharger .yaml</button>
+        </div>
+
         <div class="footer">
           📸 Guides illustrés (captures Android) : <a href="./get-token.md">Token</a> · <a href="./get-module-id.md">UID</a> — Une version iOS est envisagée pour une prochaine release.
         </div>
@@ -137,6 +144,7 @@
   const outRest = byId('outRest');
   const outSensor = byId('outSensor');
   const outEntity = byId('outEntity');
+  const outAll = byId('outAll');
 
   function sanitizeSlug(s){
     return (s||'').toLowerCase().trim()
@@ -196,7 +204,7 @@
         availability_template: >-
           {{ states('sensor.${sensor_key}') not in ['unavailable', 'unknown', None, ''] }}`;
 
-    return {REST, SENSOR, ENTITY};
+    return {REST, SENSOR, ENTITY, sensor_key};
   }
 
   function buildCover({friendly, slug, ip, uid, token, scan, prefix}){
@@ -246,7 +254,20 @@
           {% else %} mdi:blinds-horizontal
           {% endif %}`;
 
-    return {REST, SENSOR, ENTITY};
+    return {REST, SENSOR, ENTITY, sensor_key};
+  }
+
+  function buildAllYaml(blocks){
+    return (
+`# === rest_command ===
+${blocks.REST}
+
+# === sensor ===
+${blocks.SENSOR}
+
+# === entity ===
+${blocks.ENTITY}
+`);
   }
 
   function generate(){
@@ -269,11 +290,16 @@
     outRest.textContent   = blocks.REST;
     outSensor.textContent = blocks.SENSOR;
     outEntity.textContent = blocks.ENTITY;
+    outAll.textContent    = buildAllYaml(blocks);
 
-    [outRest, outSensor, outEntity].forEach(el => {
+    [outRest, outSensor, outEntity, outAll].forEach(el => {
       el.classList.add('ok');
       setTimeout(()=>el.classList.remove('ok'), 700);
     });
+
+    // stocker quelques infos pour le nom de fichier
+    outAll.dataset.slug = slug;
+    outAll.dataset.type = type;
   }
 
   function reset(){
@@ -288,18 +314,47 @@
     outRest.textContent = '# Généré ici…';
     outSensor.textContent = '# Généré ici…';
     outEntity.textContent = '# Généré ici…';
+    outAll.textContent = '# Généré ici…';
   }
 
   function copyFrom(selector){
     const el = document.querySelector(selector);
     if(!el) return;
     const txt = el.textContent;
-    navigator.clipboard.writeText(txt).then(()=>{
-      const b = document.querySelector(`[data-copy="${selector}"]`);
-      const old = b.textContent;
-      b.textContent = 'Copié ✓';
-      setTimeout(()=> b.textContent = old, 1200);
-    });
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(txt).then(()=>{
+        flashBtn(selector, 'Copié ✓');
+      });
+    } else {
+      // fallback
+      const ta = document.createElement('textarea');
+      ta.value = txt; document.body.appendChild(ta);
+      ta.select(); document.execCommand('copy'); document.body.removeChild(ta);
+      flashBtn(selector, 'Copié ✓');
+    }
+  }
+
+  function flashBtn(selector, text){
+    const b = document.querySelector(`[data-copy="${selector}"]`) || document.querySelector('#copyAllBtn');
+    if(!b) return;
+    const old = b.textContent;
+    b.textContent = text;
+    setTimeout(()=> b.textContent = old, 1200);
+  }
+
+  function downloadYaml(){
+    const content = outAll.textContent || '';
+    const slug = outAll.dataset.slug || 'yokis';
+    const type = outAll.dataset.type || 'entity';
+    const fname = `${slug}_${type}.yaml`;
+    const blob = new Blob([content], {type: 'text/yaml;charset=utf-8'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = fname;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
   }
 
   byId('buildBtn').addEventListener('click', generate);
@@ -307,6 +362,8 @@
   document.querySelectorAll('[data-copy]').forEach(btn=>{
     btn.addEventListener('click', ()=> copyFrom(btn.getAttribute('data-copy')));
   });
+  byId('copyAllBtn').addEventListener('click', ()=> copyFrom('#outAll'));
+  byId('downloadBtn').addEventListener('click', downloadYaml);
 
   // Préremplissage démo
   elFriendly.value = 'Lumière Terrasse';
