@@ -54,7 +54,7 @@ Avant toute configuration, récupérez :
 
 ### 📝 Étape 2 — Ouvrir votre fichier `configuration.yaml`
 
-1. Allez dans **Paramètres → Système → Répertoire de configuration** dans Home Assistant.  
+1. Allez dans l'extension File Editor ou par connexion SSH afin d'accèder au configuration.yaml de votre Home Assistant.  
 2. Ouvrez le fichier `configuration.yaml` avec l’éditeur intégré ou VS Code.  
 3. **Sauvegardez une copie** du fichier avant toute modification.
 
