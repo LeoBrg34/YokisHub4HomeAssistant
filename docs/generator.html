@@ -38,7 +38,6 @@
     <p class="lead">Générez automatiquement vos blocs <code>rest_command</code>, <code>sensor</code>, <code>light/cover/switch</code> pour Home Assistant à partir de l’IP du Hub, l’UID du module et votre token <strong>HTTP Basic (Base64)</strong>.</p>
 
     <div class="grid">
-      <!-- FORM -->
       <div class="card">
         <h2>🎛️ Paramètres</h2>
 
@@ -92,7 +91,6 @@
         </div>
       </div>
 
-      <!-- OUTPUTS -->
       <div class="card out">
         <h2>🧩 Blocs YAML générés</h2>
 
@@ -424,7 +422,6 @@ ${blocks.ENTITY}
   byId('copyAllBtn').addEventListener('click', ()=> copyFrom('#outAll'));
   byId('downloadBtn').addEventListener('click', downloadYaml);
 
-  // Préremplissage démo
   elType.value = 'light';
   elFriendly.value = 'Lumière Terrasse';
   elSlug.value = 'lumiere_terrasse';
