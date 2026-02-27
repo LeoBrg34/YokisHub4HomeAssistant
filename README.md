@@ -133,4 +133,4 @@ Dans le code copié, remplacez les valeurs d'exemple par vos propres information
 > Yokis est une marque déposée.
 
 📄 Licence  
-MIT © 2025 LeoBrg34
+MIT © 2026 LeoBrg34
