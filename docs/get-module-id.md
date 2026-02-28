@@ -1,4 +1,4 @@
-# Récupérer l’UID d’un module Yokis
+# 🆔 Récupérer l’UID d’un module Yokis
 
 Ce guide explique comment identifier l’UID (identifiant unique) d’un module Yokis à partir d’une requête HTTP interceptée, par exemple avec l'application PCAPdroid.
 
