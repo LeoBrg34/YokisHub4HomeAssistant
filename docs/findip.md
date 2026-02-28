@@ -1,4 +1,4 @@
-# Trouver l’IP locale de votre Yokis Hub
+# 🛜 Trouver l’IP locale de votre Yokis Hub
 
 Ce guide explique comment récupérer l’adresse IP locale de votre Yokis Hub, principalement via l’application officielle YNO.
 
