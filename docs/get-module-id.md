@@ -1,29 +1,26 @@
-# 🆔 Récupérer l’UID d’un module Yokis
+# Récupérer l’UID d’un module Yokis
 
-Ce guide explique comment **identifier l’UID (identifiant unique)** d’un module Yokis à partir d’une requête HTTP capturée (ex. via PCAPdroid).
+Ce guide explique comment identifier l’UID (identifiant unique) d’un module Yokis à partir d’une requête HTTP interceptée, par exemple avec l'application PCAPdroid.
 
-> 📸 Capture Android. L’interface peut varier selon la version.
-
----
-
-## ✅ Prérequis
-
-- Avoir déjà **capturé une requête HTTP** envoyée par l’app **Yokis YnO** vers votre Hub (voir le guide Token si besoin).
-- Être sur le **même réseau** que le Hub.
+> Note : Les captures d’écran ci-dessous ont été réalisées sur Android. L’interface peut légèrement différer sur iOS.
 
 ---
 
-## 🪄 Étapes
+## Avant de commencer
 
-1) Depuis votre outil de capture (ex. **PCAPdroid → Connections**), **ouvrez la trame HTTP** correspondant à une action sur votre module (allumer/éteindre, ouvrir/fermer, etc.).
+- Avoir déjà intercepté une requête HTTP envoyée par l’application YNO vers votre Hub (consultez le guide sur la récupération du Token si besoin).
+- Être connecté au même réseau Wi-Fi que le Hub.
 
-2) Allez dans l’onglet qui affiche l’**URL complète** de la requête (Overview / HTTP).
+---
 
-3) **Repérez l’URL** de type :
-http://192.168.0.x/command.xml?action=order&id=xxxxxxxx&order=off&ext1=0
+## Extraction de l'UID depuis l'application de capture
 
+1. Dans votre outil de capture réseau (par exemple PCAPdroid, dans l'onglet **Connections**), ouvrez la trame HTTP qui correspond à une action que vous venez d'effectuer sur votre module (allumer, éteindre, ouvrir, fermer).
+2. Accédez à la section qui affiche l’URL complète de la requête (souvent nommée Overview ou HTTP).
+3. Repérez l’URL qui ressemble à ceci :
+   `http://192.168.0.x/command.xml?action=order&id=xxxxxxxx&order=off&ext1=0`
 
-L’**UID du module** est la valeur du paramètre **`id`**.
+L’UID de votre module correspond à la valeur placée juste après `id=`.
 
 <p>
   <img src="./howto/module-name/img5.jpeg" alt="Trouver l’UID dans l’URL (paramètre id=...)" width="360">
@@ -31,22 +28,21 @@ L’**UID du module** est la valeur du paramètre **`id`**.
 
 ---
 
-## 🧪 Exemple
+## Exemple concret
 
-- **Requête** :
-http://192.168.0.156/command.xml?action=order&id=C84315B9&order=off&ext1=0
+Si la requête capturée est la suivante :
+`http://192.168.0.156/command.xml?action=order&id=C84315B9&order=off&ext1=0`
 
-
-- **UID** : `C84315B9`
+Alors l'UID de ce module est : **`C84315B9`**
 
 ---
 
-## 🔧 Utilisation dans Home Assistant
+## Intégration dans Home Assistant
 
-Utilisez cet UID dans vos blocs YAML (ex. `sensor` et `rest_command`) :
+Cet UID doit être renseigné dans vos blocs YAML (comme `sensor` et `rest_command`) pour que Home Assistant sache quel module piloter et interroger :
 
 ```yaml
-# Commande REST (ex. volet)
+# Commande REST (exemple pour un volet)
 rest_command:
   yokis_set_position_exemple:
     url: "http://192.168.0.156/command.xml?action=order&id=C84315B9&order=varX&ext1=<POSITION>"
@@ -58,18 +54,9 @@ rest_command:
 sensor:
   - platform: rest
     name: Volet Chambre Brut
-    resource: http://192.168.0.156/server.xml?gettable&update=1
+    resource: "http://192.168.0.156/server.xml?gettable&update=1"
     method: GET
     headers:
       Authorization: "Basic VOTRE_TOKEN_BASE64_ICI"
-    # value_template: utilisez le template proposé dans docs/configuration.md
+    # Utilisez le template proposé dans la documentation principale pour value_template
     unit_of_measurement: "%"
-✅ Résumé
-
-Ouvrez la trame capturée correspondant à l’action sur votre module.
-
-Cherchez l’URL avec command.xml?action=order&....
-
-L’UID est la valeur après id= (ex. id=CA1D4066).
-
-Réutilisez cet UID dans vos commandes et capteurs Home Assistant.
