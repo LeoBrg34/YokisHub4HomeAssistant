@@ -1,0 +1,5 @@
+# Fichiers generes par l assistant - ils contiennent le token du Hub
+yokis_entities.yaml
+yokis_recap.html
+*.local.yaml
+__pycache__/
